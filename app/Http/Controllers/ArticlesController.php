@@ -40,11 +40,11 @@ class ArticlesController extends SiteController
     {
         
         $portfolios = $this->getPortfolios();
-        $comments = $this->getComments();
+        $comments = $this->getComments(5);
         
         
         $articles = $this->getArticles($cat_alias);
-        
+
 
         $content = view('content_articles')->with('articles',$articles)->render();
         
@@ -59,14 +59,17 @@ class ArticlesController extends SiteController
     }
     public function show($alias = FALSE)
     {
-        $portfolios = $this->getPortfolios();
-        $comments = $this->getComments();
+       
         $article = $this->articlesRepository->one($alias, ['comments' => TRUE]);
-/* dd($article); */
         if($article){
 
             $article->img = json_decode($article->img);
         }
+      //  dd($article->comments->groupBy('parent_id'));
+        $portfolios = $this->getPortfolios();
+        $comments = $this->getComments(5);
+ 
+        
         
         $content = view('content_article')->with('article',$article)->render();
         $this->vars = (new Arr)->add($this->vars, 'content', $content);
@@ -108,9 +111,13 @@ class ArticlesController extends SiteController
 
         return $articles;
     } 
-    public function getComments()
+    public function getComments($take)
     {
-        $comments = $this->commentsRepository->get('*', 3, FALSE);
+        $comments = $this->commentsRepository->get('*', $take);
+        
+        if($comments) {
+			$comments->load('article','user');
+		}
      
         
         return $comments;

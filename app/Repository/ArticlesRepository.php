@@ -22,4 +22,5 @@ class ArticlesRepository extends Repository
 		
 		return $article;
 	}
+	
 }
