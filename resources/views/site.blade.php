@@ -131,7 +131,7 @@
 				    <div class="inner group">
 				        <!-- START CONTENT -->
                         @yield('content')
-                        @yield('content_articles')
+                        
                         
 				        <!-- END CONTENT -->
 				        <!-- START SIDEBAR -->

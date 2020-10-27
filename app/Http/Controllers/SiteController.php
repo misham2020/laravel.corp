@@ -16,8 +16,8 @@ class SiteController extends Controller
     protected $commentsRepository;
     protected $articlesRepository;
     protected $slidersRepository;
-    protected $contentRightBar;
-    protected $contentLeftBar;
+    protected $contentRightBar = FALSE;
+	protected $contentLeftBar = FALSE;
     protected $template;
     protected $vars;
     protected $bar = 'no';
@@ -42,9 +42,17 @@ class SiteController extends Controller
         $rightBar = view('rightBar')->with('content_rightBar',$this->contentRightBar)->render();
         $this->vars = (new Arr)->add($this->vars, 'rightBar', $rightBar); 
     }
+
+    if($this->contentLeftBar) {
+
+        $leftBar = view('leftBar')->with('content_leftBar',$this->contentLeftBar)->render();
+        $this->vars = (new Arr)->add($this->vars, 'leftBar', $leftBar); 
+    } 
+    $this->vars = (new Arr)->add($this->vars,'bar',$this->bar);
+    
      return view($this->template)->with($this->vars);
     }
-  
+    
    public function getMenu() {
 		
    $menu = $this->menusRepository->get('*', FALSE, FALSE);

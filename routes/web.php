@@ -22,6 +22,7 @@ Route::get('/articles/cat/{cat_alias?}', 'ArticlesController@index')->name('arti
 Route::get('/articles/{alias}', 'ArticlesController@show')->name('articles.show');
 Route::get('/portfolios/{alias}','PortfoliosController@show')->name('portfolios.show');
 Route::resource('comment','CommentController',['only'=>['store']]);
+Route::match(['get', 'post'],'/contacts', 'ContactController@index')->name('contacts');
 
 
 
