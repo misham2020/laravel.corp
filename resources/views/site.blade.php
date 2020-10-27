@@ -127,7 +127,7 @@
 				<!-- END SLIDER -->
 
 				<!-- START PRIMARY -->
-				<div id="primary" class="sidebar-right">
+				<div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no'}}">
 				    <div class="inner group">
 				        <!-- START CONTENT -->
                         @yield('content')

@@ -20,7 +20,7 @@ class SiteController extends Controller
     protected $contentLeftBar;
     protected $template;
     protected $vars;
-    protected $bar = FALSE;
+    protected $bar = 'no';
 
     public function __construct(MenusRepository $menusRepository)
     {

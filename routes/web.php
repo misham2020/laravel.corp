@@ -17,9 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'IndexController@index')->name('home');
 Route::get('/articles', 'ArticlesController@index')->name('articles');
+Route::get('/portfolios', 'PortfoliosController@index')->name('portfolio');
 Route::get('/articles/cat/{cat_alias?}', 'ArticlesController@index')->name('articlesCat');
 Route::get('/articles/{alias}', 'ArticlesController@show')->name('articles.show');
+Route::get('/portfolios/{alias}','PortfoliosController@show')->name('portfolios.show');
 Route::resource('comment','CommentController',['only'=>['store']]);
+
 
 
 
