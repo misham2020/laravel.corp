@@ -24,6 +24,23 @@ Route::get('/portfolios/{alias}','PortfoliosController@show')->name('portfolios.
 Route::resource('comment','CommentController',['only'=>['store']]);
 Route::match(['get', 'post'],'/contacts', 'ContactController@index')->name('contacts');
 
+//admin
+Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
+	
+	//admin
+	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
+	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
+	
+	
+	
+});
+
+ Auth::routes(); 
+
+	Route::get('/auth', 'HomeController@index')->name('home');
+
+
+
 
 
 
