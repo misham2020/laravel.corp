@@ -87,7 +87,7 @@ class CommentController extends SiteController
 		
 		return Response::json(['success' => TRUE,'comment'=>$view_comment,'data' => $data]);
         
-        exit();
+        
     }
 
     /**

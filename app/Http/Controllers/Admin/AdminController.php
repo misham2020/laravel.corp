@@ -11,9 +11,9 @@ use Lavary\Menu\Menu as LavMenu;
 class AdminController extends \App\Http\Controllers\Controller
 {
      
-    protected $p_rep;
+    protected $portfolioRepository;
     
-    protected $a_rep;
+    protected $articlesRepository;
     
     protected $user;
     
@@ -27,7 +27,7 @@ class AdminController extends \App\Http\Controllers\Controller
     
     public function __construct() {
 		
-		$this->user = Auth::user();
+		$this->user =(new Auth)::user();
 		
 
 	}

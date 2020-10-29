@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,8 +30,11 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	
 	//admin
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
-	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
 	
+	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
+	Route::get('/articles/edit/{alias?}',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
+	Route::get('/articles/destroy/{alias?}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
+	Route::get('/articles/create/',['uses' => 'Admin\ArticlesController@create', 'as' => 'admin.articles.create']); 
 	
 	
 });
