@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -42,7 +43,8 @@ class User extends Authenticatable
     public function roles() {
 		return $this->belongsToMany('App\Role','role_user');
     }
-
+   
+ 
     
     public function canDo($permission, $require = FALSE) {
 		if(is_array($permission)) {
@@ -63,13 +65,13 @@ class User extends Authenticatable
 			foreach($this->roles as $role) {
 				foreach($role->perms as $perm) {
 					//foo*    foobar
-                    if(Str::is($permission,$perm->name)) {
+					if(Str::is($permission,$perm->name)) {
 						return TRUE;
 					}
 				}
 			}
 		}
-	}
+	}  
 	
 	// string  ['role1', 'role2']
 	public function hasRole($name, $require = false)
@@ -92,7 +94,9 @@ class User extends Authenticatable
                 }
             }
         }
-
+      
         return false;
+        
     }
+    
 }

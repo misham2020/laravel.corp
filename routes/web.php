@@ -32,9 +32,10 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	Route::get('/',['uses' => 'Admin\IndexController@index','as' => 'adminIndex']);
 	
 	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
-	Route::get('/articles/edit/{alias?}',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
+	Route::get('/articles/{alias}/edit',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
 	Route::get('/articles/destroy/{alias?}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
 	Route::get('/articles/create/',['uses' => 'Admin\ArticlesController@create', 'as' => 'admin.articles.create']); 
+	Route::get('/articles/store/',['uses' => 'Admin\ArticlesController@store', 'as' => 'admin.articles.store']); 
 	
 	
 });

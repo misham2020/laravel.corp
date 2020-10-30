@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Article;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Repository\ArticlesRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ArticlesController extends AdminController
 {
@@ -14,10 +17,9 @@ class ArticlesController extends AdminController
 		
 		parent::__construct();
 		
-		/* if(Gate::denies('VIEW_ADMIN_ARTICLES')) {
-			abort(403);
-		} */
-		
+		 
+        
+
 		$this->articlesRepository = $articlesRepository;
 		
 		
@@ -38,7 +40,10 @@ class ArticlesController extends AdminController
         
         $articles = $this->getArticles();
         $this->content = view('admin.articles_content')->with('articles',$articles)->render();
-       
+        
+       if(Gate::denies('viewAdminArticles', new Article)) {
+			abort(403);
+		}   
         
         return $this->renderOutput(); 
         
@@ -63,7 +68,30 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        //
+        
+        if(Gate::denies('save', new Article)) {
+			abort(403);
+		} 
+        
+        
+        $this->title = "Добавить новый материал";
+		
+		$categories = Category::select(['title','alias','parent_id','id'])->get();
+		
+		$lists = array();
+		
+		foreach($categories as $category) {
+			if($category->parent_id == 0) {
+				$lists[$category->title] = array();
+			}
+			else {
+				$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;    
+			}
+		}
+		
+		$this->content = view('admin.articles_create_content')->with('categories', $lists)->render();
+		
+		return $this->renderOutput();
     }
 
     /**
