@@ -1,7 +1,7 @@
 <div id="content-page" class="content group">
     <div class="hentry group">
 
-{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['articles'=>$article->alias]) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['alias'=>$article->alias] ) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
 <ul>
 <li class="text-field">
@@ -75,7 +75,7 @@
 <span class="label">Изображения материала:</span>
 </label>
 
-{{ HTML::image(asset(env('THEME')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
+{{ Html::image(asset('site').'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
 {!! Form::hidden('old_image',$article->img->path) !!}
 
 </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use App\Repository\ArticlesRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -41,7 +42,7 @@ class ArticlesController extends AdminController
         $articles = $this->getArticles();
         $this->content = view('admin.articles_content')->with('articles',$articles)->render();
         
-       if(Gate::denies('viewAdminArticles', new Article)) {
+       if((new Gate)::denies('viewAdminArticles', new Article)) {
 			abort(403);
 		}   
         
@@ -69,7 +70,7 @@ class ArticlesController extends AdminController
     public function create()
     {
         
-        if(Gate::denies('save', new Article)) {
+        if((new Gate)::denies('save', new Article)) {
 			abort(403);
 		} 
         
@@ -100,9 +101,16 @@ class ArticlesController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         //
+		$result = $this->articlesRepository->addArticle($request);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		
+		return redirect('/admin')->with($result);
     }
 
     /**
@@ -122,11 +130,38 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($alias)
     {
         //
+        
+        $article = $this->articlesRepository->one($alias);
+        if((new Gate)::denies('edit', new Article)) {
+			abort(403);
+		} 
+	
+		$article->img = json_decode($article->img);
+		
+		
+		$categories = Category::select(['title','alias','parent_id','id'])->get();
+		
+		$lists = array();
+		
+		foreach($categories as $category) {
+			if($category->parent_id == 0) {
+				$lists[$category->title] = array();
+			}
+			else {
+				$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;    
+			}
+		}
+		
+		$this->title = 'Редактирование материала - '. $article->title;
+		
+		
+		$this->content = view('admin.articles_create_content')->with(['categories' =>$lists, 'article' => $article])->render();
+		
+		return $this->renderOutput();
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -134,9 +169,18 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, $alias)
     {
         //
+        $article = $this->articlesRepository->one($alias);
+        $result = $this->articlesRepository->updateArticle($request, $article);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		
+		return redirect('/admin')->with($result);
+        
     }
 
     /**

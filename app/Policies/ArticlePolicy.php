@@ -27,5 +27,10 @@ class ArticlePolicy
 
         return $user->canDo('view_admin_articles');
         
+    } 
+    public function edit(User $user) {
+
+        return $user->canDo('update_articles');
+        
 	} 
 }
