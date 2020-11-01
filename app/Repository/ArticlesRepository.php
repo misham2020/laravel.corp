@@ -3,10 +3,12 @@
 namespace App\Repository;
 
 use App\Article;
+use App\Comment;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Image;
 use Illuminate\Support\Str;
+
 
 class ArticlesRepository extends Repository
 {
@@ -85,10 +87,7 @@ class ArticlesRepository extends Repository
 			}
 			
 		}
-		
-		
-		
-		
+	
 	}
 
 	public function updateArticle($request, $article) {
@@ -142,13 +141,9 @@ class ArticlesRepository extends Repository
 						
 				
 				$data['img'] = json_encode($obj);  
-				
-				                         
-				
+			
 			}
-			
-			
-			
+		
 		}
 		
 		$article->fill($data); 
@@ -157,5 +152,18 @@ class ArticlesRepository extends Repository
 			return ['status' => 'Материал обновлен'];
 		} 
 
+	}
+	public function deleteArticle($article) {
+		
+		 if(Gate::denies('destroy', $article)) {
+			abort(403);
+		} 
+	
+            $article->comments()->delete();
+        
+		if($article->delete()) {
+			return ['status' => 'Материал удален'];
+		}
+		
 	}
 }

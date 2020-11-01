@@ -11,7 +11,7 @@ class MenusRepository extends Repository
     public function __construct(Menu $menu)
     {
        
-//dd($menu);
+
         $this->model = $menu;
         
         

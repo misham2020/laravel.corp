@@ -32,5 +32,8 @@ class ArticlePolicy
 
         return $user->canDo('update_articles');
         
-	} 
+    } 
+    public function destroy(User $user) {
+		return $user->canDo('delete_articles');
+	}
 }

@@ -34,12 +34,13 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
 	//Route::resource('/articles','Admin\ArticlesController');
 	Route::get('/articles/edit/{alias?}',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
-	Route::get('/articles/destroy/{alias?}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
+	Route::DELETE('/articles/destroy/{alias}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
 	Route::get('/articles/create/',['uses' => 'Admin\ArticlesController@create', 'as' => 'admin.articles.create']); 
 	Route::post('/articles/store/',['uses' => 'Admin\ArticlesController@store', 'as' => 'admin.articles.store']);  
 	Route::put('/articles/update/{alias}',['uses' => 'Admin\ArticlesController@update', 'as' => 'admin.articles.update']);  
 	
-	
+	Route::get('/permissions',['uses' => 'Admin\PermissionsController@index','as' => 'admin.permissions.index']);
+	Route::post('/permissions/store/',['uses' => 'Admin\PermissionsController@store', 'as' => 'admin.permissions.store']);
 });
 
  Auth::routes(); 

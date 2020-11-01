@@ -189,8 +189,19 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($alias)
     {
-        //
+       
+        $article = $this->articlesRepository->one($alias);
+    
+        $result = $this->articlesRepository->deleteArticle($article);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		
+		return redirect('/admin')->with($result);
+        
+        
     }
 }
