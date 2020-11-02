@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Comment;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -43,12 +44,12 @@ class CommentController extends SiteController
         
         $data['article_id'] = $request->input('comment_post_ID');
         $data['parent_id'] = $request->input('comment_parent');
+
+            $validator = Validator::make($data, [
         
-        $validator = Validator::make($data,[
-        
-        	'article_id' => 'integer|required',
-        	'parent_id' => 'integer|required',
-        	'text' => 'string|required'
+            'article_id' => 'integer|required',
+            'parent_id' => 'integer|required',
+            'text' => 'string|required'
         
         ]);
         

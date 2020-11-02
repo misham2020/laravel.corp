@@ -10,9 +10,9 @@
 				                			<div class="hentry-post group">
 						                        <div class="thumb-img"><img style="width:55px" src="{{ asset('site') }}/images/projects/{{ $portfolio->img->mini }}" alt="001" title="001" /></div>
 						                        <div class="text">
-						                            <a href="{{-- {{ route('portfolios.show',['alias'=>$portfolio->alias]) }} --}}" title="{{ $portfolio->title }}" class="title">{{ $portfolio->title }}</a>
+						                            <a href="{ {{ route('portfolios.show',['alias'=>$portfolio->alias]) }}" title="{{ $portfolio->title }}" class="title">{{ $portfolio->title }}</a>
                                                     <p>{{ \Illuminate\Support\Str::limit($portfolio->text,200) }}</p>
-						                            <a class="read-more" href="{{-- {{ route('portfolios.show',['alias'=>$portfolio->alias]) }} --}}">&rarr; {{ Lang::get('ru.read_more') }}</a>
+						                            <a class="read-more" href="{{ route('portfolios.show',['alias'=>$portfolio->alias]) }}">&rarr; {{ Lang::get('ru.read_more') }}</a>
 						                        </div>
 						                    </div>
 				                			
@@ -22,7 +22,7 @@
 				                </div>
 				            </div>
 				            
-				            @if(!$comments->isEmpty())
+				            @if($comments)
 				            <div class="widget-last widget recent-comments">
 				                <h3>{{ Lang::get('ru.latest_comments') }}</h3>
 				            	<div class="recent-post recent-comments group">

@@ -41,6 +41,11 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	
 	Route::get('/permissions',['uses' => 'Admin\PermissionsController@index','as' => 'admin.permissions.index']);
 	Route::post('/permissions/store/',['uses' => 'Admin\PermissionsController@store', 'as' => 'admin.permissions.store']);
+	Route::get('/menus',['uses' => 'Admin\MenusController@index','as' => 'admin.menus.index']);
+	Route::get('/menus/create',['uses' => 'Admin\MenusController@create','as' => 'admin.menus.create']);
+	Route::get('/menus/edit/{alias?}',['uses' => 'Admin\MenusController@edit', 'as' => 'admin.menus.edit']);
+	Route::DELETE('/menus/destroy/{alias?}',['uses' => 'Admin\MenusController@destroy', 'as' => 'admin.menus.destroy']);
+	Route::post('/menus/store/',['uses' => 'Admin\MenusController@store', 'as' => 'admin.menus.store']);
 });
 
  Auth::routes(); 
