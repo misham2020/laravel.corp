@@ -39,6 +39,9 @@ class RouteServiceProvider extends ServiceProvider
 		
         parent::boot();
         
+         Route::bind('menus', function ($value) {
+        	return \App\Menu::where('id', $value)->first();
+        });  
        
    
     }

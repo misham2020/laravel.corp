@@ -135,6 +135,7 @@ class ArticlesController extends AdminController
         //
         
         $article = $this->articlesRepository->one($alias);
+       
         if((new Gate)::denies('edit', new Article)) {
 			abort(403);
 		} 

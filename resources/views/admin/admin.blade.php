@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset('site') }}/css/buttons.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset('site') }}/css/cache-custom.css" /> <!-- MAIN THEME STYLESHEET -->
         <link rel="stylesheet" type="text/css" media="all" href="{{ asset('site') }}/css/cache-custom.css" /> <!-- MAIN THEME STYLESHEET -->
-        
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('site') }}/css/jquery-ui.css" /> 
         
 		
 		
@@ -29,6 +29,7 @@
         
         <!-- JAVASCRIPTs -->
         <script type="text/javascript" src="{{ asset('site') }}/js/jquery.js"></script>
+        <script type="text/javascript" src="{{ asset('site') }}/js/jquery-ui.js"></script>
         <script type="text/javascript" src="{{ asset('site') }}/js/ckeditor/ckeditor.js"></script>
         <script type="text/javascript" src="{{ asset('site') }}/js/bootstrap-filestyle.min.js"></script>
         

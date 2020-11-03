@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Article;
+use App\Menu;
 use App\Permission;
 use App\Policies\ArticlePolicy;
+use App\Policies\MenusPolicy;
 use App\Policies\PermissionsPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\User;
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
        Article::class => ArticlePolicy::class,
        Permission::class => PermissionsPolicy::class,
+       Menu::class => MenusPolicy::class,
         
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];

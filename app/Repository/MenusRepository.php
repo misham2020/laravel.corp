@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Menu;
 use App\Repository\Repository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class MenusRepository extends Repository
 {
@@ -15,5 +16,60 @@ class MenusRepository extends Repository
         $this->model = $menu;
         
         
+    }
+    public function addMenu($request) {
+        /* if(Gate::denies('save', $this->model)) {
+            abort(403);
+        } */
+        
+        $data = $request->only('type', 'title', 'parent_id');
+        
+        if (empty($data)) {
+            return ['error'=>'Нет данных'];
+        }
+        
+//dd($request->all());
+        
+
+        switch ($data['type']) {
+            
+            case 'customLink':
+                $data['path'] = $request->input('custom_link');
+            break;
+            
+            case 'blogLink':
+            
+                if ($request->input('category_alias')) {
+                    if ($request->input('category_alias') == 'parent_id') {
+                        $data['path'] = route('articles.index');
+                    } else {
+                        $data['path'] = route('articlesCat', ['cat_alias'=>$request->input('category_alias')]);
+                    }
+                } elseif ($request->input('article_alias')) {
+                    $data['path'] = route('articles.show', ['alias' => $request->input('article_alias')]);
+                }
+            
+            break;
+            
+            case 'portfolioLink':
+                if ($request->input('filter_alias')) {
+                    if ($request->input('filter_alias') == 'parent_id') {
+                        $data['path'] = route('portfolios.index');
+                    }
+                } elseif ($request->input('portfolio_alias')) {
+                    $data['path'] = route('portfolios.show', ['alias' => $request->input('portfolio_alias')]);
+                }
+            break;
+            
+            }
+        
+        unset($data['type']);
+        if(!isset($data['path'])){
+            return ['error'=>'Путь для ссылки не задан'];
+        }
+
+        if ($this->model->fill($data)->save()) {
+            return ['status'=>'Ссылка добавлена'];
+        }
     }
 }

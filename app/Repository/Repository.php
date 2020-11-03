@@ -59,6 +59,7 @@ abstract class Repository
 		
 		return $result;
 	}
+	
 	public function transliterate($string) {
 		$str = mb_strtolower($string, 'UTF-8');
 		
