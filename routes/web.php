@@ -41,12 +41,20 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	
 	Route::get('/permissions',['uses' => 'Admin\PermissionsController@index','as' => 'admin.permissions.index']);
 	Route::post('/permissions/store/',['uses' => 'Admin\PermissionsController@store', 'as' => 'admin.permissions.store']);
+
 	 Route::get('/menus',['uses' => 'Admin\MenusController@index','as' => 'admin.menus.index']);
 	Route::get('/menus/create',['uses' => 'Admin\MenusController@create','as' => 'admin.menus.create']);
 	Route::get('/menus/edit/{menus?}',['uses' => 'Admin\MenusController@edit', 'as' => 'admin.menus.edit']);
-	Route::DELETE('/menus/destroy/{id?}',['uses' => 'Admin\MenusController@destroy', 'as' => 'admin.menus.destroy']);
+	Route::DELETE('/menus/destroy/{menus?}',['uses' => 'Admin\MenusController@destroy', 'as' => 'admin.menus.destroy']);
 	Route::post('/menus/store/',['uses' => 'Admin\MenusController@store', 'as' => 'admin.menus.store']); 
-	Route::put('/menus/update/{id?}',['uses' => 'Admin\ArticlesController@update', 'as' => 'admin.menus.update']);
+	Route::put('/menus/update/{menus?}',['uses' => 'Admin\ArticlesController@update', 'as' => 'admin.menus.update']);
+
+	Route::get('/users',['uses' => 'Admin\UsersController@index','as' => 'admin.users.index']);
+	Route::get('/users/create',['uses' => 'Admin\UsersController@create','as' => 'admin.users.create']);
+	Route::get('/users/edit/{users?}',['uses' => 'Admin\UsersController@edit', 'as' => 'admin.users.edit']);
+	Route::DELETE('/users/destroy/{users?}',['uses' => 'Admin\UsersController@destroy', 'as' => 'admin.users.destroy']);
+	Route::post('/users/store/',['uses' => 'Admin\UsersController@store', 'as' => 'admin.users.store']); 
+	Route::put('/users/update/{users?}',['uses' => 'Admin\UsersController@update', 'as' => 'admin.users.update']);
 	
 });
 

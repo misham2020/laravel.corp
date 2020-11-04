@@ -24,7 +24,7 @@ class PermissionsController extends AdminController
         $this->per_rep = $per_rep;
         $this->rol_rep = $rol_rep;
         
-        $this->template = env('THEME').'.admin.permissions';
+        $this->template = 'admin.permissions';
     }
     /**
      * Display a listing of the resource.

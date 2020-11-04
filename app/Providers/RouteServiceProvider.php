@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Article;
+use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,10 @@ class RouteServiceProvider extends ServiceProvider
         
          Route::bind('menus', function ($value) {
         	return \App\Menu::where('id', $value)->first();
+        });
+        
+        Route::bind('users', function ($value) {
+        	return User::where('id', $value)->first();
         });  
        
    
