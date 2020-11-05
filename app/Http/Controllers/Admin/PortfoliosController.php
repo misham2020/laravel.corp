@@ -10,6 +10,7 @@ use App\Repository\PortfoliosRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
+use App\Policies\PortfoliosPolicy;
 
 class PortfoliosController extends AdminController
 {
@@ -30,15 +31,15 @@ class PortfoliosController extends AdminController
     public function index()
     {
         //
-        
+        if((new Gate)::denies('admin', new Portfolio())) {
+			abort(403);
+		} 
         $this->title = 'Менеджер портфолио';
         
         $portfolios = $this->getPortfolios();
         $this->content = view('admin.portfolios_content')->with('portfolios', $portfolios)->render();
         
-       /* if((new Gate)::denies('viewAdminPortfolios', new Portfolio)) {
-			abort(403);
-		}   */ 
+         
         
         return $this->renderOutput();  
     }
@@ -52,11 +53,6 @@ class PortfoliosController extends AdminController
     }
     public function create()
     {
-        
-        /* if((new Gate)::denies('save', new Portfolio)) {
-			abort(403);
-		}  */
-        
         
         $this->title = "Добавить новый материал";
 

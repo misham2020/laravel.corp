@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Permission;
 use App\Repository\PermissionsRepository;
 use App\Repository\RolesRepository;
 use Illuminate\Http\Request;
@@ -17,9 +18,6 @@ class PermissionsController extends AdminController
     {
         parent::__construct();
         
-        /* if(Gate::denies('edit_users')) {
-			abort(403);
-		} */
         
         $this->per_rep = $per_rep;
         $this->rol_rep = $rol_rep;
@@ -34,7 +32,9 @@ class PermissionsController extends AdminController
     public function index()
     {
         //
-        
+        if((new Gate)::denies('admin', new Permission())) {
+			abort(403);
+		}
         $this->title = "Менеджер прав пользователей";
         
         $roles = $this->getRoles();

@@ -83,9 +83,6 @@ class PortfoliosRepository extends Repository
 	}
 	public function updatePortfolio($request, $portfolio) {
 
-		/* if(Gate::denies('edit', $this->model)) {
-			abort(403);
-		} */
 		
 		$data = $request->except('_token','image','_method');
 		
@@ -151,11 +148,6 @@ class PortfoliosRepository extends Repository
 	
 	
 	public function deletePortfolio($portfolio) {
-		
-		/* if(Gate::denies('destroy', $article)) {
-			abort(403);
-		} */
-		
 		
 		
 		if($portfolio->delete()) {

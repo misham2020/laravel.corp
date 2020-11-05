@@ -17,9 +17,7 @@ class MenusRepository extends Repository
         
     }
     public function addMenu($request) {
-        /* if(Gate::denies('save', $this->model)) {
-            abort(403);
-        } */
+       
         
         $data = $request->only('type', 'title', 'parent_id');
         

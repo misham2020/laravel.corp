@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Lavary\Menu\Menu as LavMenu;
 
 class AdminController extends \App\Http\Controllers\Controller
@@ -55,13 +57,15 @@ class AdminController extends \App\Http\Controllers\Controller
 		return (new LavMenu)->make('adminMenu', function($menu) {
 			
 			$menu->add('Статьи',array('route' => 'admin.articles.index'));
-			
-			$menu->add('Портфолио',  array('route'  => 'admin.portfolios.index'));
-			$menu->add('Меню',  array('route'  => 'admin.menus.index'));
-			$menu->add('Пользователи',  array('route'  => 'admin.users.index'));
-			$menu->add('Привилегии',  array('route'  => 'admin.permissions.index'));
-			$menu->add('главная',  array('route'  => 'index'));
-			
+
+            if ((new Gate)::allows('admin', new User())) {
+            
+                $menu->add('Портфолио', array('route'  => 'admin.portfolios.index'));
+                $menu->add('Меню', array('route'  => 'admin.menus.index'));
+                $menu->add('Пользователи', array('route'  => 'admin.users.index'));
+                $menu->add('Привилегии', array('route'  => 'admin.permissions.index'));
+                $menu->add('главная', array('route'  => 'index'));
+            }
 			
 		});
 	}

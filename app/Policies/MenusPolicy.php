@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Menu;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -18,4 +19,10 @@ class MenusPolicy
     {
         //
     }
+    public function admin(User $user) {
+
+        return $user->canDo('admin_role');
+        
+    } 
+    
 }

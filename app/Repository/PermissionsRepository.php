@@ -22,9 +22,6 @@ class PermissionsRepository extends Repository
 	
 	public function changePermissions ($request) {
 		
-		/* if((new Gate)::denies('change', $this->model)) {
-			abort(403);
-		} */
 		
 		$data = $request->except('_token');
 		

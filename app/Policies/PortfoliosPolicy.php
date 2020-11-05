@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PermissionsPolicy
+class PortfoliosPolicy
 {
     use HandlesAuthorization;
 
@@ -18,15 +18,9 @@ class PermissionsPolicy
     {
         //
     }
-    public function change(User $user) {
-    	
-    	
-		return $user->canDo('edit_users');
-    }
     public function admin(User $user) {
 
         return $user->canDo('admin_role');
         
     } 
-    
 }

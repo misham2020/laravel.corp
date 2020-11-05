@@ -10,10 +10,12 @@ use App\Http\Requests\MenusRequest;
 use App\Repository\ArticlesRepository;
 use App\Repository\MenusRepository;
 use App\Repository\PortfoliosRepository;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Lavary\Menu\Menu as LavMenu;
+use App\Policies\MenusPolicy;
 
 class MenusController extends AdminController
 {
@@ -25,9 +27,7 @@ class MenusController extends AdminController
     {
         parent::__construct();
         
-        /* if(Gate::denies('VIEW_ADMIN_MENU')) {
-			abort(403);	
-		} */ 
+        
         
         $this->menusRepository = $menusRepository;
         $this->articlesRepository = $articlesRepository;
@@ -46,7 +46,9 @@ class MenusController extends AdminController
     public function index()
     {
         //
-        
+        if((new Gate)::denies('admin', new Menu)) {
+			abort(403);
+		} 
         $menu = $this->getMenus();
         
         $this->content = view('admin.menus_content')->with('menus',$menu)->render();

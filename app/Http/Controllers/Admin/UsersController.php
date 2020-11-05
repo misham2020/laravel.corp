@@ -8,9 +8,7 @@ use App\Repository\UsersRepository;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-
-
-
+use Illuminate\Support\Facades\Gate;
 
 class UsersController extends AdminController
 {
@@ -22,9 +20,7 @@ class UsersController extends AdminController
     public function __construct(RolesRepository $rol_rep, UsersRepository $us_rep) {
         parent::__construct();
         
-        /* if (Gate::denies('EDIT_USERS')) {
-            abort(403);
-        } */
+       
 
         $this->us_rep = $us_rep;
         $this->rol_rep = $rol_rep;
@@ -42,6 +38,9 @@ class UsersController extends AdminController
     public function index()
     {
         //
+        if((new Gate)::denies('admin', new User)) {
+			abort(403);
+		} 
         $users = $this->us_rep->get();
 
         $this->content = view('admin.users_content')->with(['users'=>$users ])->render();
@@ -82,9 +81,10 @@ class UsersController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         //
+        dd($request);
 		$result = $this->us_rep->addUser($request);
 		if(is_array($result) && !empty($result['error'])) {
 			return back()->with($result);
@@ -131,7 +131,7 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         //
 		$result = $this->us_rep->updateUser($request,$user);

@@ -19,13 +19,9 @@ class UserPolicy
         //
     }
 	
-	/* public function create(User $user)
-    {
-		return $user->can('EDIT_USERS');
-    }
-    
-    public function edit(User $user)
-    {
-		return $user->can('EDIT_USERS');
-    } */
+    public function admin(User $user) {
+
+      return $user->canDo('admin_role');
+      
+  } 
 }

@@ -22,7 +22,7 @@ class UsersRepository extends Repository
 		/* if (Gate::denies('create',$this->model)) {
             abort(403);
         } */
-		
+		dd($request);
 		$data = $request->all();
 		//dd($data);
 	
@@ -45,10 +45,6 @@ class UsersRepository extends Repository
 	public function updateUser($request, $user) {
 		
 		
-		/* if (Gate::denies('edit',$this->model)) {
-            abort(403);
-        } */
-		
 		$data = $request->all();
 		
 		if(isset($data['password'])) {
@@ -63,10 +59,6 @@ class UsersRepository extends Repository
 	}
 	
 	public function deleteUser($user) {
-		
-		/* if (Gate::denies('edit',$this->model)) {
-            abort(403);
-        } */
 		
 		
 		$user->roles()->detach();
