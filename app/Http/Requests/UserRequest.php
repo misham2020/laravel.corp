@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class UserRequest extends Request
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +14,7 @@ class UserRequest extends Request
      */
     public function authorize()
     {
+        return TRUE;
        //return \Auth::user()->canDo('EDIT_USERS');
     }
 	
@@ -40,12 +42,12 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        //$id = (isset($this->route()->parameter('users')->id)) ? $this->route()->parameter('users')->id : '';
+        $id = (isset($this->route()->parameter('users')->id)) ? $this->route()->parameter('users')->id : '';
 		
 		return [
              'name' => 'required|max:255',
 			 'role_id' => 'required|integer',
-             'email' => 'required|email|max:255|unique:users,email,'/* .$id */
+             'email' => 'required|email|max:255|unique:users,email,' .$id 
         ];
     }
 }
