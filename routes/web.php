@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'IndexController@index')->name('home');
+Route::get('/', 'IndexController@index')->name('index');
 Route::get('/articles', 'ArticlesController@index')->name('articles');
 Route::get('/portfolios', 'PortfoliosController@index')->name('portfolio');
 Route::get('/articles/cat/{cat_alias?}', 'ArticlesController@index')->name('articlesCat');
@@ -33,11 +33,11 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	
 	Route::get('/articles',['uses' => 'Admin\ArticlesController@index','as' => 'admin.articles.index']);
 	//Route::resource('/articles','Admin\ArticlesController');
-	Route::get('/articles/edit/{alias?}',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
-	Route::DELETE('/articles/destroy/{alias}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
+	Route::get('/articles/edit/{article?}',['uses' => 'Admin\ArticlesController@edit', 'as' => 'admin.articles.edit']);
+	Route::DELETE('/articles/destroy/{article?}',['uses' => 'Admin\ArticlesController@destroy', 'as' => 'admin.articles.destroy']);
 	Route::get('/articles/create/',['uses' => 'Admin\ArticlesController@create', 'as' => 'admin.articles.create']); 
 	Route::post('/articles/store/',['uses' => 'Admin\ArticlesController@store', 'as' => 'admin.articles.store']);  
-	Route::put('/articles/update/{alias}',['uses' => 'Admin\ArticlesController@update', 'as' => 'admin.articles.update']);  
+	Route::put('/articles/update/{article?}',['uses' => 'Admin\ArticlesController@update', 'as' => 'admin.articles.update']);  
 	
 	Route::get('/permissions',['uses' => 'Admin\PermissionsController@index','as' => 'admin.permissions.index']);
 	Route::post('/permissions/store/',['uses' => 'Admin\PermissionsController@store', 'as' => 'admin.permissions.store']);
@@ -56,6 +56,12 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	Route::post('/users/store/',['uses' => 'Admin\UsersController@store', 'as' => 'admin.users.store']); 
 	Route::put('/users/update/{users?}',['uses' => 'Admin\UsersController@update', 'as' => 'admin.users.update']);
 	
+	Route::get('/portfolios',['uses' => 'Admin\PortfoliosController@index','as' => 'admin.portfolios.index']);
+	Route::get('/portfolios/create',['uses' => 'Admin\PortfoliosController@create','as' => 'admin.portfolios.create']);
+	Route::get('/portfolios/edit/{port?}',['uses' => 'Admin\PortfoliosController@edit', 'as' => 'admin.portfolios.edit']);
+	Route::DELETE('/portfolios/destroy/{port}',['uses' => 'Admin\PortfoliosController@destroy', 'as' => 'admin.portfolios.destroy']);
+	Route::post('/portfolios/store',['uses' => 'Admin\PortfoliosController@store', 'as' => 'admin.portfolios.store']); 
+	Route::put('/portfolios/update/{port?}',['uses' => 'Admin\PortfoliosController@update', 'as' => 'admin.portfolios.update']);
 });
 
  Auth::routes(); 

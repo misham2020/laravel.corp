@@ -130,11 +130,11 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($alias)
+    public function edit(Article $article)
     {
         //
         
-        $article = $this->articlesRepository->one($alias);
+    // $article = $this->articlesRepository->one($alias);
        
         if((new Gate)::denies('edit', new Article)) {
 			abort(403);
@@ -170,10 +170,9 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, $alias)
+    public function update(ArticleRequest $request, Article $article)
     {
         //
-        $article = $this->articlesRepository->one($alias);
         $result = $this->articlesRepository->updateArticle($request, $article);
 		
 		if(is_array($result) && !empty($result['error'])) {
@@ -190,11 +189,10 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($alias)
+    public function destroy(Article $article)
     {
        
-        $article = $this->articlesRepository->one($alias);
-    
+       
         $result = $this->articlesRepository->deleteArticle($article);
 		
 		if(is_array($result) && !empty($result['error'])) {

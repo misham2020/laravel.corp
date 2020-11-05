@@ -3,9 +3,10 @@
 	
 	
 		'articles_img' => [
-						'max' => ['width'=>816,'height'=>282],
-						'mini' => ['width'=>55,'height'=>55]
-						
+					'max' => ['width'=>816,'height'=>282],
+					'mini' => ['width'=>55,'height'=>55],
+					'maxP' => ['width'=>770,'height'=>368],
+					'miniP' => ['width'=>175,'height'=>175],
 						],
 		
 		'image' => [
@@ -13,8 +14,6 @@
 					'height'=>768
 				],				
 		
-	
-	
-	
+		
 	];
 ?>

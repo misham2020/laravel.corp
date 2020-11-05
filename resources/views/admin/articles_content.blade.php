@@ -20,7 +20,7 @@
 											@foreach($articles as $article)
 											<tr>
 				                                <td class="align-left">{{$article->id}}</td>
-				                                <td class="align-left">{!! Html::link(route('admin.articles.edit', ['alias'=>$article->alias] ), $article->title ) !!}</td>
+				                                <td class="align-left">{!! Html::link(route('admin.articles.edit', ['article'=>$article->alias] ), $article->title ) !!}</td>
 				                                <td class="align-left">{{\Illuminate\Support\Str::limit($article->text,200)}}</td>
 				                                <td>
 													@if(isset($article->img->mini))
@@ -30,7 +30,7 @@
 				                                <td>{{$article->category->title}}</td>
 				                                <td>{{$article->alias}}</td>
 				                                <td>
-												{!! Form::open(['url' => route('admin.articles.destroy',['alias'=>$article->alias]),'class'=>'form-horizontal','method'=>'POST']) !!}
+												{!! Form::open(['url' => route('admin.articles.destroy',['article'=>$article->alias]),'class'=>'form-horizontal','method'=>'POST']) !!}
 												    {{ method_field('DELETE') }}
 												    {!! Form::button('Удалить', ['class' => 'btn btn-french-5','type'=>'submit']) !!}
 												{!! Form::close() !!}

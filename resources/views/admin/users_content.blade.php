@@ -9,7 +9,7 @@
 		<th>ID</th>
 		<th>Name</th>
 		<th>Email</th>
-		<th>Login</th>
+		{{-- <th>Login</th> --}}
 		<th>Role</th>
 		<th>Удалить</th>
 	</thead>
@@ -21,7 +21,7 @@
 			<td>{{ $user->id }}</td>
 			<td>{!! Html::link(route('admin.users.edit',['users' => $user->id]),$user->name) !!}</td>
 			<td>{{ $user->email }}</td>
-			<td>{{ $user->login }}</td>
+			{{-- <td>{{ $user->login }}</td> --}}
 			<td>{{ $user->roles->implode('name', ', ') }}</td>
 
 

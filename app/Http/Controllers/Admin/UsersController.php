@@ -65,7 +65,7 @@ class UsersController extends AdminController
 		    return $returnRoles;
 		}, []);
 		
-		$this->content = view('admin.users_create_content')->with('roles', $roles)->render();
+		$this->content = view('admin.users_create_content')->with('roles',$roles)->render();
         
         return $this->renderOutput();
     }

@@ -1,7 +1,7 @@
 <div id="content-page" class="content group">
     <div class="hentry group">
 
-{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['alias'=>$article->alias] ) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['article'=>$article->alias]) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
 
 <ul>
 <li class="text-field">
@@ -44,7 +44,7 @@
 <span class="sublabel">введите псевдоним</span><br />
 </label>
 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-{!! Form::text('alias', isset($article->alias) ? $article->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы']) !!}
+{!! Form::text('article', isset($article->alias) ? $article->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы']) !!}
 </div>
 </li>
 
@@ -75,7 +75,7 @@
 <span class="label">Изображения материала:</span>
 </label>
 
-{{ Html::image(asset('site').'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
+{{ Html::image(asset(('site')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
 {!! Form::hidden('old_image',$article->img->path) !!}
 
 </li>

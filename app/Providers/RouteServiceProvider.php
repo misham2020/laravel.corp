@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Article;
+use App\Portfolio;
 use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
@@ -46,6 +47,13 @@ class RouteServiceProvider extends ServiceProvider
         
         Route::bind('users', function ($value) {
         	return User::where('id', $value)->first();
+        });  
+        Route::bind('port', function ($value) {
+        	return Portfolio::where('alias', $value)->first();
+        });
+        
+        Route::bind('article', function ($value) {
+        	return Article::where('alias', $value)->first();
         });  
        
    

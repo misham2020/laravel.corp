@@ -132,10 +132,10 @@ class MenusController extends AdminController
 		    return $returnFilters;
 		}, ['parent' => 'Раздел портфолио']);
 		
-		$portfolios = $this->portfolioRepository->get(['id','alias','title'])->reduce(function ($returnPortfolios, $portfolio) {
+ 		$portfolios = $this->portfoliosRepository->get(['id','alias','title'])->reduce(function ($returnPortfolios, $portfolio) {
 		    $returnPortfolios[$portfolio->alias] = $portfolio->title;
 		    return $returnPortfolios;
-		}, []);
+		}, []); 
 		
 		$this->content = view('admin.menus_create_content')->with(['menus'=>$menus,'categories'=>$list,'articles'=>$articles,'filters' => $filters,'portfolios' => $portfolios])->render();
 		
@@ -286,9 +286,16 @@ class MenusController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Menu $menu)
     {
         //
+        $result = $this->menusRepository->updateMenu($request,$menu);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result); 
+		}
+		
+		return redirect('/admin')->with($result);
     }
 
     /**
@@ -297,8 +304,19 @@ class MenusController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
         //
+        
+        //
+        $result = $this->menusRepository->deleteMenu($menu);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		
+		return redirect('/admin')->with($result);
     }
 }
+
+
