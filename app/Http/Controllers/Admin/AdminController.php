@@ -65,6 +65,7 @@ class AdminController extends \App\Http\Controllers\Controller
                 $menu->add('Пользователи', array('route'  => 'admin.users.index'));
                 $menu->add('Привилегии', array('route'  => 'admin.permissions.index'));
                 $menu->add('главная', array('route'  => 'index'));
+                $menu->add('Комментарии', array('route'  => 'admin.comments.index'));
             }
 			
 		});

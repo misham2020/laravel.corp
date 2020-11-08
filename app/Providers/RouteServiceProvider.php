@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Article;
+use App\Comment;
 use App\Portfolio;
 use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -54,6 +55,9 @@ class RouteServiceProvider extends ServiceProvider
         
         Route::bind('article', function ($value) {
         	return Article::where('alias', $value)->first();
+        });
+        Route::bind('comment', function ($value) {
+        	return Comment::where('id', $value)->first();
         });  
        
    

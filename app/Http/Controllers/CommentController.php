@@ -134,5 +134,12 @@ class CommentController extends SiteController
     public function destroy($id)
     {
         //
+        $result = $this->commentsRepository->deleteComment($id);
+		
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		
+		return redirect('/admin')->with($result);
     }
 }

@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin','middleware'=> 'auth' ],function() {
 	Route::DELETE('/portfolios/destroy/{port}',['uses' => 'Admin\PortfoliosController@destroy', 'as' => 'admin.portfolios.destroy']);
 	Route::post('/portfolios/store',['uses' => 'Admin\PortfoliosController@store', 'as' => 'admin.portfolios.store']); 
 	Route::put('/portfolios/update/{port?}',['uses' => 'Admin\PortfoliosController@update', 'as' => 'admin.portfolios.update']);
+	Route::get('/comments',['uses' => 'Admin\CommentsController@index','as' => 'admin.comments.index']);
+	Route::DELETE('/comments/destroy/{comment}',['uses' => 'Admin\CommentsController@destroy', 'as' => 'admin.comments.destroy']);
 });
 
  Auth::routes(); 

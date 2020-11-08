@@ -5,6 +5,13 @@
 									<div id="comment-{{ $item->id }}" class="comment-container">
 										 <div class="comment-author vcard">
 											
+											{{-- <button type="button" id= "delete" class="btn btn-danger">Удалить</button> --}}
+
+											{!! Form::open(['url' => route('admin.comments.destroy',['comment'=>$item->id]),'class'=>'form-horizontal','method'=>'POST']) !!}
+												    {{ method_field('DELETE') }}
+												    {!! Form::button('Удалить', ['class' => 'btn btn-french-5','type'=>'submit']) !!}
+												{!! Form::close() !!}
+
 											@set($hash, isset($item->email) ? md5($item->email) : md5($item->user->email))
 											
 											<img alt="" src="https://www.gravatar.com/avatar/{{$hash}}?d=mm&s=75" class="avatar" height="75" width="75" />

@@ -22,7 +22,7 @@ class UsersRepository extends Repository
 		/* if (Gate::denies('create',$this->model)) {
             abort(403);
         } */
-		dd($request);
+		
 		$data = $request->all();
 		//dd($data);
 	

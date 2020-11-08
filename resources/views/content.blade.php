@@ -45,7 +45,7 @@
 				                                    </div>
 				                                </div>
 				                            </div>
-				                            <h4><a href="{{-- {{ route('portfolios.show',['alias' => $item->alias])}} --}}">{{ $item->title }}</a></h4>
+				                            <h4><a href="{{ route('portfolios.show',['alias' => $item->alias])}}">{{ $item->title }}</a></h4>
 				                            <p>{{  \Illuminate\Support\Str::limit($item->text,200) }}</p>
 				                        </div>
 				                        
