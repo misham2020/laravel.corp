@@ -44,9 +44,9 @@ class ArticlesController extends SiteController
         
         
         $articles = $this->getArticles($cat_alias);
+        
 
-
-        $content = view('content_articles')->with('articles',$articles)->render();
+        $content = view('content_articles')->with('articles', $articles)->render();
         
         $bar = view('articleBar')->with(['comments' => $comments, 'portfolios' => $portfolios])->render();
         $this->content_rightBar = view('rightBar')->with('content_rightBar',$bar)->render();

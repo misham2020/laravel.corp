@@ -48,6 +48,8 @@ class PortfoliosRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'text' => 'required',
+           /*  'image' => 'required', */
+            'customer' => 'required',
             
         ];
     }

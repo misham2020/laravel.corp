@@ -49,8 +49,8 @@
 				                </div>
 				            </div>
 				            <div class="widget-last yit-widget widget col1_4 one-fourth col yit_text_quote">
-				                <blockquote class="text-quote-quote">�Anyone who has never made a mistake has never tried anything new.�</blockquote>
-				                <cite class="text-quote-author">Albert Einstein</cite>
+				                <blockquote class="text-quote-quote">{{ Lang::get('ru.quote1') }}</blockquote>
+				                <cite class="text-quote-author">{{ Lang::get('ru.author1') }}</cite>
 				            </div>
 				        </div>
 				    </div>

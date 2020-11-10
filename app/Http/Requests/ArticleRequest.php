@@ -47,9 +47,11 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
+            'desc' => 'required|max:50',
             'title' => 'required|max:255',
             'text' => 'required',
-            'category_id' => 'required|integer'
+            'category_id' => 'required|integer',
+            /* 'image' => 'required', */
         ];
     }
 }

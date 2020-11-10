@@ -46,9 +46,13 @@ class UsersRepository extends Repository
 		
 		
 		$data = $request->all();
+		//dd($data);
 		
 		if(isset($data['password'])) {
 			$data['password'] = bcrypt($data['password']);
+		}
+		if(!isset($data['password'])){
+			$data['password'] = $user->password;
 		}
 		
 		$user->fill($data)->update();

@@ -5,7 +5,7 @@
                                      <h3>From our blog</h3>
                                      <div class="recent-post group">
                                     
-                                        @foreach($articles as $article)
+                                        @foreach($articles->sortByDesc('created_at')  as $article)
                                             
                                             <div class="hentry-post group">
                                                 <div class="thumb-img"><img src="{{asset('site')}}/images/articles/{{ $article->img->mini }}" alt="001" title="001" /></div>
@@ -20,7 +20,7 @@
                                     </div>
                                 @endif
     
-                                
+                                 
                                 <div class="widget-last widget text-image">
                                     <h3>Customer support</h3>
                                     <div class="text-image" style="text-align:left"><img src="{{asset('site')}}/images/callus.gif" alt="Customer support" /></div>

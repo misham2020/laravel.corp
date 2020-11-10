@@ -47,7 +47,7 @@ class UserRequest extends FormRequest
 		return [
              'name' => 'required|max:255',
 			 'role_id' => 'required|integer',
-             'email' => 'required|email|max:255|unique:users,email,' .$id 
+             'email' => 'required|email|max:255|unique:users,email,'.$id 
         ];
     }
 }

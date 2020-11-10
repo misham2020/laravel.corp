@@ -84,7 +84,7 @@ class UsersController extends AdminController
     public function store(UserRequest $request)
     {
         //
-        dd($request);
+        //dd($request);
 		$result = $this->us_rep->addUser($request);
 		if(is_array($result) && !empty($result['error'])) {
 			return back()->with($result);

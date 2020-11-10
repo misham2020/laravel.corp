@@ -24,10 +24,14 @@ class PortfoliosRepository extends Repository
 		// }
 		
 		$data = $request->except('_token','image');
-		
+	
 		if(empty($data)) {
 			return array('error' => 'Нет данных');
 		}
+		
+		/* if(empty($data['image'])) {
+			return array('error' => 'Вставте каритнку');
+		} */
 		
 		if(empty($data['alias'])) {
 			$data['alias'] = $this->transliterate($data['title']);
@@ -67,19 +71,19 @@ class PortfoliosRepository extends Repository
 				
 				$data['img'] = json_encode($obj);  
 				
-				/* $this->model->fill($data); 
+				 $this->model->fill($data); 
 				
-				if($request->portfolio()->save($this->model)) {
-					return ['status' => 'Материал добавлен'];
-				} */     
+				   
 				if ($this->model->fill($data)->save()) {
-					return ['status'=>'Ссылка добавлена'];
+					return ['status'=>'Материал добавлен'];
 				}                     
 				
 			}
 			
 		}
-	
+		 if(empty($data['image'])) {
+			return array('error' => 'Загрузите изображение');
+		} 
 	}
 	public function updatePortfolio($request, $portfolio) {
 

@@ -1,6 +1,6 @@
 <div id="content-page" class="content group">
     <div class="hentry group">
-<h3 class="title_page">Пользователи</h3>
+<h3 class="title_page">Меню</h3>
 
 
 <div class="short-table white">

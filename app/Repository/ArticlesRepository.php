@@ -87,7 +87,9 @@ class ArticlesRepository extends Repository
 			}
 			
 		}
-	
+	    if(empty($data['image'])) {
+			return array('error' => 'Загрузите изображение');
+		} 
 	}
 
 	public function updateArticle($request, $article) {

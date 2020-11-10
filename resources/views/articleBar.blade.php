@@ -5,7 +5,7 @@
 				                <h3>{{ Lang::get('ru.latest_projects') }}</h3>
 				                <div class="recent-post group">
 				                	@if(!$portfolios->isEmpty())
-				                		@foreach($portfolios as $portfolio)
+				                		@foreach($portfolios->sortByDesc('created_at') as $portfolio)
 				                			
 				                			<div class="hentry-post group">
 						                        <div class="thumb-img"><img style="width:55px" src="{{ asset('site') }}/images/projects/{{ $portfolio->img->mini }}" alt="001" title="001" /></div>
@@ -27,7 +27,7 @@
 				                <h3>{{ Lang::get('ru.latest_comments') }}</h3>
 				            	<div class="recent-post recent-comments group">
 				            	
-				            	@foreach($comments as $comment)
+				            	@foreach($comments->sortByDesc('created_at') as $comment)
 				            	
 				            		<div class="the-post group">
 										<div class="avatar">
